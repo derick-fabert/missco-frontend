@@ -71,14 +71,39 @@ function SpareParts() {
   return (
     <section className="mt-16 space-y-6 border-t border-black pt-10 md:mt-20 md:pt-12 pb-4">
       <h2 className="text-2xl font-semibold sm:text-3xl">Spare Parts Available!</h2>
-      <div className="grid grid-cols-1 gap-4 text-base leading-relaxed sm:text-lg sm:grid-cols-2">
+      <div className="flex flex-col md:flex-row justify-around gap-4 text-base leading-relaxed sm:text-lg">
         <div>
-          <h3 className="px-4 py-3 text-lg font-semibold sm:text-2 xl">Fuel Cover</h3>  
-          <Image className="px-6" src="/fuel-cover.jpg" alt="Fuel Cover" width={1000} height={1000} />
+          <h3 className="px-4 py-3 text-lg font-semibold sm:text-2 xl">Fuel Cover</h3>
+          <Image
+            className="mx-auto h-[125px] w-auto object-contain"
+            src="/fuel-cover.jpg"
+            alt="Fuel Cover"
+            width={1000}
+            height={1000}
+            sizes="125px"
+          />
         </div>
         <div>
           <h3 className="px-4 py-3 text-lg font-semibold sm:text-2 xl">Wick Cover</h3>
-          <Image className="px-6" src="/wick-cover.jpg" alt="Wick Cover" width={1000} height={1000} />
+          <Image
+            className="mx-auto h-[125px] w-auto object-contain"
+            src="/wick-cover.jpg"
+            alt="Wick Cover"
+            width={1000}
+            height={1000}
+            sizes="125px"
+          />
+        </div>
+        <div>
+          <h3 className="px-4 py-3 text-lg font-semibold sm:text-2 xl">18" Wicking</h3>
+          <Image
+            className="mx-auto h-[125px] w-auto object-contain"
+            src="/wick-cut.jpg"
+            alt='18" Wicking'
+            width={1000}
+            height={1000}
+            sizes="125px"
+          />
         </div>
       </div>
     </section>
