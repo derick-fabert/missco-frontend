@@ -95,7 +95,9 @@ function SpareParts() {
           />
         </div>
         <div>
-          <h3 className="px-4 py-3 text-lg font-semibold sm:text-2 xl">18" Wicking</h3>
+          <h3 className="px-4 py-3 text-lg font-semibold sm:text-2 xl">
+            18&quot; Wicking
+          </h3>
           <Image
             className="mx-auto h-[125px] w-auto object-contain"
             src="/wick-cut.jpg"

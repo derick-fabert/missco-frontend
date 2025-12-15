@@ -34,3 +34,24 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Contact form email configuration
+
+The `/api/contact` route uses SMTP credentials to send email from the contact page.
+
+1. Create a `.env.local` file (ignored by git) and add:
+
+   ```
+   SMTP_HOST=smtp.your-provider.com
+   SMTP_PORT=587
+   SMTP_SECURE=false
+   SMTP_USER=your-smtp-username
+   SMTP_PASS=your-smtp-password
+   SMTP_FROM="Your Name <no-reply@your-domain.com>"
+   CONTACT_RECIPIENT=where-you-want-messages@example.com
+   ```
+
+2. Restart the dev server after changes to environment variables.
+3. When deploying (e.g. on Vercel), add the same variables in the host’s dashboard.
+
+> `SMTP_FROM` falls back to `SMTP_USER` if omitted. `CONTACT_RECIPIENT` is optional; if you leave it blank, messages deliver to `missuply@aol.com` by default.
