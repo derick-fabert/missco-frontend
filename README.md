@@ -35,12 +35,23 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-## Contact form (Netlify)
+## Contact form email configuration
 
-The contact page is wired for [Netlify Forms](https://docs.netlify.com/forms/setup/). Netlify picks up the form automatically during the build:
+The `/api/contact` route sends form submissions through SMTP. Provide credentials via environment variables:
 
-1. Deploy the site to Netlify.
-2. In the Netlify dashboard, enable **Forms → Form notifications** and add the email address that should receive submissions (for example `missuply@aol.com`).
-3. Optionally create a custom success page and set the form `action` if you want to redirect visitors after they submit.
+1. Create a `.env.local` file (ignored by git) and add:
 
-Because Netlify handles storage and notifications, no SMTP configuration is required in the project.
+   ```
+   SMTP_HOST=smtp.your-provider.com
+   SMTP_PORT=587
+   SMTP_SECURE=false
+   SMTP_USER=your-smtp-username
+   SMTP_PASS=your-smtp-password
+   SMTP_FROM="Your Name <no-reply@your-domain.com>"
+   CONTACT_RECIPIENT=where-you-want-messages@example.com
+   ```
+
+2. Restart the dev server after changes to environment variables.
+3. When deploying (Netlify, Vercel, etc.), populate the same variables in the host’s environment settings.
+
+> `SMTP_FROM` falls back to `SMTP_USER` if omitted. `CONTACT_RECIPIENT` is optional; leaving it blank delivers to the default inbox `missuply@aol.com`.
