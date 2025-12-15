@@ -12,7 +12,7 @@ export default function ContactPage() {
           </h1>
           <div className="space-y-4 text-base leading-relaxed sm:text-lg">
             <p className="font-semibold">
-              Phyllis J. Bouckaert &amp; Kenneth J. Bouckaert
+              Kenneth J. Bouckaert &amp; Mark Hammerschmidt 
             </p>
             <div>
               <p>P.O. Box 22466</p>
