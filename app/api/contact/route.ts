@@ -1,5 +1,7 @@
+export const runtime = "nodejs";
+
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer, { Transporter } from "nodemailer";
+import type { Transporter } from "nodemailer";
 
 type ContactPayload = Partial<{
   name: string;
@@ -32,7 +34,9 @@ function escapeHtml(value: string) {
   });
 }
 
-function buildTransporter() {
+async function buildTransporter() {
+  const { default: nodemailer } = await import("nodemailer");
+
   const requiredEnv = [
     "SMTP_HOST",
     "SMTP_PORT",
@@ -69,16 +73,18 @@ function buildTransporter() {
 
 let cachedTransporter: Transporter | null = null;
 
-async function getTransporter() {
+async function getTransporter(): Promise<Transporter> {
   if (!cachedTransporter) {
-    cachedTransporter = buildTransporter();
-    await cachedTransporter.verify().catch((error) => {
-      cachedTransporter = null;
+    const transporter = await buildTransporter();
+    try {
+      await transporter.verify();
+      cachedTransporter = transporter;
+    } catch (error) {
       throw error;
-    });
+    }
   }
 
-  return cachedTransporter;
+  return cachedTransporter!;
 }
 
 function validatePayload(payload: ContactPayload) {
