@@ -16,6 +16,17 @@ export function ContactForm() {
     useState<SubmissionState>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  function buildFormPayload(data: ContactFormFields) {
+    const encoded = new URLSearchParams();
+    encoded.append("form-name", "contact");
+    Object.entries(data).forEach(([key, value]) => {
+      if (typeof value === "string") {
+        encoded.append(key, value);
+      }
+    });
+    return encoded.toString();
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -32,10 +43,10 @@ export function ContactForm() {
     setErrorMessage(null);
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("/", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: buildFormPayload(payload),
       });
 
       if (!response.ok) {
@@ -64,7 +75,21 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6" name="contact">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-6"
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+    >
+      <input type="hidden" name="form-name" value="contact" />
+      <p aria-hidden="true" className="hidden">
+        <label>
+          Leave this field empty:
+          <input name="bot-field" />
+        </label>
+      </p>
       <div className="flex flex-col gap-2">
         <label
           htmlFor="name"
