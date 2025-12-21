@@ -64,12 +64,7 @@ export function ContactForm() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-6"
-      name="contact"
-      data-netlify="true"
-    >
+    <form onSubmit={handleSubmit} className="space-y-6" name="contact">
       <div className="flex flex-col gap-2">
         <label
           htmlFor="name"
