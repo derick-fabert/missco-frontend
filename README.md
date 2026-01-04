@@ -37,7 +37,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Contact form email configuration
 
-The `/api/contact` route uses SMTP credentials to send email from the contact page.
+The `/api/contact` route sends form submissions through SMTP. Provide credentials via environment variables:
 
 1. Create a `.env.local` file (ignored by git) and add:
 
@@ -52,6 +52,6 @@ The `/api/contact` route uses SMTP credentials to send email from the contact pa
    ```
 
 2. Restart the dev server after changes to environment variables.
-3. When deploying (e.g. on Vercel), add the same variables in the host’s dashboard.
+3. When deploying (Netlify, Vercel, etc.), populate the same variables in the host’s environment settings.
 
-> `SMTP_FROM` falls back to `SMTP_USER` if omitted. `CONTACT_RECIPIENT` is optional; if you leave it blank, messages deliver to `missuply@aol.com` by default.
+> `SMTP_FROM` falls back to `SMTP_USER` if omitted. `CONTACT_RECIPIENT` is optional; leaving it blank delivers to the default inbox `missuply@aol.com`.
